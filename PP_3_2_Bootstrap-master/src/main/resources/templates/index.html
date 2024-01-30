@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Admin</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-xxl navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:if="${person != null}" th:object="${person}" th:text="${person.getEmail()}">Navbar</a>
+        <a class="navbar-brand">with roles:</a>
+        <a class="navbar-brand" th:if="${person != null}" th:object="${person}" th:text="${person.getRolesString()}">Roles</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDark"
+                aria-controls="navbarDark" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse show" id="navbarDark">
+            <ul class="navbar-nav me-auto mb-2 mb-xl-0"></ul>
+            <form class="d-flex" th:action="@{/logout}" th:method="POST">
+                <button class="btn btn-outline-light">Logout</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="row">
+    <div class="col-sm-2">
+
+        <br>
+        <div class="d-grid gap-2">
+
+            <button th:if="${person != null && person.getRolesString() == 'ADMIN'}"  type="button"
+                    class="btn btn-outline-primary" data-bs-toggle="button" onclick="location.href='/admin'"
+                    autocomplete="off">Admin
+            </button>
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="button"
+                    onclick="location.href='/user'" autocomplete="off">User
+            </button>
+
+        </div>
+
+    </div>
+    <div class="col-sm-9">
+        <div class="p-3 mb-2 bg-light text-dark">
+            <div class="row">
+                <div class="col-8 col-sm-12">
+
+                    <h1>User information-page</h1>
+
+                    <nav th:if="${person != null && person.getRolesString() == 'ADMIN'}" class="nav nav-tabs"
+                         id="nav-tab" role="tablist">
+                        <a class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" href="/admin" role="tab"
+                           aria-controls="nav-home" aria-selected="true">Users table</a>
+
+                        <a class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" href="/admin/add" role="tab"
+                           aria-controls="nav-profile" aria-selected="false">New User</a>
+                    </nav>
+
+
+                    <h5> About user</h5>
+                    <div class="border">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Age</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Role</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="user : ${person}">
+
+                                <td th:text="${user.getId()}"></td>
+                                <td th:text="${user.getUsername()}"></td>
+                                <td th:text="${user.getLastName()}"></td>
+                                <td th:text="${user.getAge()}"></td>
+                                <td th:text="${user.getEmail()}"></td>
+                                <td th:text="${user.getRolesString()}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+
+</body>
+</html>
