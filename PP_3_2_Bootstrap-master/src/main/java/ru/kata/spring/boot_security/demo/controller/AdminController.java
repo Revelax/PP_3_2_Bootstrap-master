@@ -29,7 +29,10 @@ public class AdminController {
         this.personValidator = personValidator;
         this.roleService = roleService;
     }
-
+    @ModelAttribute("person")
+    public Person getPerson() {
+        return new Person();
+    }
 
     @GetMapping("")
     public String adminPage(Model model, Principal principal) {
