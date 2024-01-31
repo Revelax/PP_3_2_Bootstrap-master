@@ -22,7 +22,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.personService = personService;
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -47,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    public static PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

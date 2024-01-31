@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,7 +26,7 @@ public class PersonServiceImpl implements PersonService {
 
 
     @Autowired
-    public PersonServiceImpl(PersonDao personDao, PasswordEncoder passwordEncoder, RoleService roleService) {
+    public PersonServiceImpl(PersonDao personDao, @Lazy PasswordEncoder passwordEncoder, RoleService roleService) {
         this.personDao = personDao;
         this.passwordEncoder = passwordEncoder;
         this.roleService = roleService;
