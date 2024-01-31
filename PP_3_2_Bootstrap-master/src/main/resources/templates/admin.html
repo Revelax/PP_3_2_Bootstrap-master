@@ -195,7 +195,10 @@
                                             <label for="inputEmail" class="form-label tab"><b>Email</b></label>
                                             <input type="email" class="form-control" id="inputEmail"
                                                    placeholder="name@example.com"
+                                                   th:class="${#fields.hasErrors('email')}? 'class= form-control is-invalid' : 'class= form-control'"
                                                    th:field="*{email}">
+                                            <label for="inputEmail" th:errors="*{email}"
+                                                   th:if="${#fields.hasErrors('email')}"></label>
                                         </div>
                                     </div>
 
@@ -306,7 +309,10 @@
                             <label for="editModalEmail" class="form-label">Email</label>
                             <input type="email" class="form-control" id="editModalEmail"
                                    placeholder="name@example.com"
+                                   th:class="${#fields.hasErrors('email')}? 'class= form-control is-invalid' : 'class= form-control'"
                                    th:field="*{email}">
+                            <label for="editModalEmail" th:errors="*{email}"
+                                   th:if="${#fields.hasErrors('email')}"></label>
                         </div>
                     </div>
                     <br>

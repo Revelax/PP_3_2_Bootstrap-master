@@ -30,7 +30,7 @@ public class PersonDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.person.getUsername();
+        return this.person.getEmail();
     }
 
     @Override

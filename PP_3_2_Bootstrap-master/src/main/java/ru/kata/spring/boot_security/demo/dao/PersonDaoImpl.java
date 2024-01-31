@@ -56,11 +56,11 @@ public class PersonDaoImpl implements PersonDao {
     }
 
     @Override
-    public Optional<Person> getPersonByName(String username) {
-        String query = "SELECT p FROM Person p JOIN FETCH p.roles WHERE p.username = :username";
+    public Optional<Person> getPersonByName(String email) {
+        String query = "SELECT p FROM Person p JOIN FETCH p.roles WHERE p.email = :email";
         try {
             Person person = entityManager.createQuery(query, Person.class)
-                    .setParameter("username", username)
+                    .setParameter("email", email)
                     .getSingleResult();
             return Optional.of(person);
         } catch (NoResultException e) {

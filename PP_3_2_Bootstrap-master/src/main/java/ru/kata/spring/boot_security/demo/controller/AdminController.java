@@ -55,7 +55,7 @@ public class AdminController {
     public String update(@PathVariable("id") int id, @ModelAttribute("editUser") @Valid Person updatePerson, BindingResult bindingResult,
                          @RequestParam(value = "roles", required = false) Set<Integer> roleIds, Model model) {
         Person person = personService.getUserById(id);
-        if (!person.getUsername().equals(updatePerson.getUsername())) {
+        if (!person.getEmail().equals(updatePerson.getEmail())) {
             personValidator.validate(updatePerson, bindingResult);
         }
         if (bindingResult.hasErrors()) {
