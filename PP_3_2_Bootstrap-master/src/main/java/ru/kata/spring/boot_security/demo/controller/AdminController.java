@@ -35,9 +35,7 @@ public class AdminController {
     }
 
     @GetMapping("")
-    public String adminPage(Model model, Principal principal) {
-        Person person = personService.getPersonByName(principal.getName()).orElse(null);
-        model.addAttribute("person", person);
+    public String adminPage(Model model) {
         model.addAttribute("users", personService.getAllPeople());
         model.addAttribute("roles", roleService.getAllRoles());
         return "/admin";
@@ -62,8 +60,6 @@ public class AdminController {
             model.addAttribute("roles", roleService.getAllRoles());
             return "/admin";
         }
-        if (bindingResult.hasErrors())
-            return "/admin";
 
         personService.editUserAndHisRoles(id, updatePerson, roleIds);
         return redirect;
